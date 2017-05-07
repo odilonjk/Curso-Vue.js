@@ -1,6 +1,10 @@
-# krogr
+Repositório para o curso de **Vue.js** da [Alura](http://www.alura.com.br).
 
-> A Vue.js project
+* Node.js: **6.10.3**
+* Vue: **2.8.1**
+* Npm: **3.10.10**
+* Nvm: **0.32.0**
+
 
 ## Build Setup
 
