@@ -16,15 +16,26 @@
 	  	  		
 
 
-  	<div>
-			<img v-for="foto in fotos" :src="foto.url" :alt="foto.titulo">
-	  </div>
+  	<ul class="fotos">
+      <li class="fotos-item" v-for="foto of fotos">
+      	<krgr-painel :titulo="foto.titulo">
+  				<img :src="foto.url" :alt="foto.titulo" class="imagem-responsiva">		
+  			</krgr-painel>
+      	
+      </li>
+    </ul>
+
   </div>
 
 </template>
 
 <script>
+import Painel from './components/shared/painel/Painel.vue';
+
 export default {
+	components: {
+		'krgr-painel': Painel
+	},
   data() {
   	return {
   		titulo: 'krogr photos',
@@ -56,7 +67,9 @@ export default {
 
 <style>
 
+/* Estilo do header */
 .container {
+	margin: 0 auto;
 	width: 100%;
 	height: 300px;
 	background-image: url("./assets/banner2.jpg");
@@ -77,6 +90,7 @@ export default {
 	width: 300px;
 }
 
+ /* Estilo do menu do header */
 .menu {
 	margin-right: 40px;
 	text-align: center;
@@ -87,8 +101,8 @@ export default {
 }
 
 .menu li:not(:first-child):before {
-    content: "|";
-    opacity: 0.4;
+  content: "|";
+  opacity: 0.4;
 }
 
 .menu .menu-item {
@@ -98,4 +112,19 @@ export default {
 	text-decoration: none;
 	padding: 10px;
 }
+
+/* Estilo da lista de fotos */
+.fotos {
+	background-color: #e6e6e6;
+	list-style: none;
+}
+
+.fotos .fotos-item {
+	display: inline-block;
+}
+
+.imagem-responsiva {
+	width: 100%;
+}
+
 </style>
