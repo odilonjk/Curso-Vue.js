@@ -15,9 +15,9 @@
   	</div>
 	  	  		
 
-
+  	<input type="search" class="filtro" placeholder="título" @input="filtro = $event.target.value">
   	<ul class="fotos">
-      <li class="fotos-item" v-for="foto of fotos">
+      <li class="fotos-item" v-for="foto of fotosComFiltro">
       	<krgr-painel :titulo="foto.titulo">
 					<img :src="foto.url" :alt="foto.titulo" class="imagem-responsiva">		
 				</krgr-painel>
@@ -36,6 +36,7 @@ export default {
 	components: {
 		'krgr-painel': Painel
 	},
+
   data() {
   	return {
   		titulo: 'krogr photos',
@@ -53,9 +54,22 @@ export default {
   				descricao: 'about'
   			}
   		],
-  		fotos: []
+  		fotos: [],
+  		filtro: ''
   	}
   },
+
+  computed: {
+  	fotosComFiltro() {
+  		if(this.filtro) {
+  			let exp = new RegExp(this.filtro.trim(), 'i');
+  			return this.fotos.filter(foto => exp.test(foto.titulo));
+  		} else {
+  			return this.fotos;
+  		}
+  	}
+  },
+
   created() {
   	this.$http.get('http://localhost:3000/v1/fotos')
   		.then(res => res.json())
@@ -114,9 +128,15 @@ export default {
 }
 
 /* Estilo da lista de fotos */
+.filtro {
+	display: block;
+	margin-top: 10px;
+	padding: 8px;
+	width: 100%;
+}
+
 .fotos {
 	margin: 0 auto;
-	background-color: #e6e6e6;
 	list-style: none;
 }
 
