@@ -1,6 +1,6 @@
 <template>
 	
-  <div>
+  <div id="root">
 
   	<div class="container"> 	
 	  	<div class="title-container">
@@ -19,8 +19,8 @@
   	<ul class="fotos">
       <li class="fotos-item" v-for="foto of fotos">
       	<krgr-painel :titulo="foto.titulo">
-  				<img :src="foto.url" :alt="foto.titulo" class="imagem-responsiva">		
-  			</krgr-painel>
+					<img :src="foto.url" :alt="foto.titulo" class="imagem-responsiva">		
+				</krgr-painel>
       	
       </li>
     </ul>
@@ -115,6 +115,7 @@ export default {
 
 /* Estilo da lista de fotos */
 .fotos {
+	margin: 0 auto;
 	background-color: #e6e6e6;
 	list-style: none;
 }
@@ -124,7 +125,7 @@ export default {
 }
 
 .imagem-responsiva {
-	width: 100%;
+	width: 98%;
 }
 
 </style>

@@ -2,9 +2,9 @@
       	
 	<div class="painel">
 		<h5 class="painel-titulo">{{ titulo }}</h5>
-		<div>
+		<slot class="painel-conteudo">
 			
-		</div>
+		</slot>
 	</div>
 
 </template>
@@ -15,13 +15,14 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 
 	.painel {
 		padding: 0 auto;
 		display: inline-block;
 		margin: 5px;
-		box-shadow: 3px 5px 5px grey;
+		background: #fff;
+		box-shadow: 3px 3px 3px grey;
 		width: 200px;
 		height: 100%;
 		vertical-align: top;
@@ -30,11 +31,13 @@ export default {
 
 	.painel .painel-titulo {
 		font-family: helvetica;
+		font-weight: normal;
 		text-align: center;
-		background: #fff;
-		margin: 0 0 15px 0;
+		background: #ddd;
+		margin: 4px;
 		padding: 10px;
-		text-transform: uppercase;
+		text-transform: lowercase;
+		border-radius: 6px;
 	}
 
 </style>
