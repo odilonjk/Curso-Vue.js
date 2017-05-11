@@ -8,7 +8,7 @@
 	  		
 		  	<ul class="menu">
 	  			<li v-for="item in menu" class="lista">
-	  				<a :href="item.url" class="menu-item">{{ 	item.descricao }}</a>
+		  				<a :href="item.url" class="menu-item">{{ 	item.descricao }}</a>
 	  			</li>
 	  		</ul>	
 			</div>
@@ -19,7 +19,7 @@
   	<ul class="fotos">
       <li class="fotos-item" v-for="foto of fotosComFiltro">
       	<krgr-painel :titulo="foto.titulo">
-					<img :src="foto.url" :alt="foto.titulo" class="imagem-responsiva">		
+      		<imagem-responsiva :url="foto.url" :alt="foto.titulo" />
 				</krgr-painel>
       	
       </li>
@@ -31,10 +31,12 @@
 
 <script>
 import Painel from './components/shared/painel/Painel.vue';
+import ImagemResponsiva from './components/shared/imagem-responsiva/ImagemResponsiva.vue';
 
 export default {
 	components: {
-		'krgr-painel': Painel
+		'krgr-painel': Painel,
+		'imagem-responsiva': ImagemResponsiva
 	},
 
   data() {
@@ -142,10 +144,6 @@ export default {
 
 .fotos .fotos-item {
 	display: inline-block;
-}
-
-.imagem-responsiva {
-	width: 98%;
 }
 
 </style>
