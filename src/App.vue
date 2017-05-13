@@ -4,80 +4,50 @@
 
   	<div class="container"> 	
 	  	<div class="title-container">
+	  		
 	  		<h1 class="title">{{ titulo }}</h1>	
 	  		
+	  		
 		  	<ul class="menu">
-	  			<li v-for="item in menu" class="lista">
-		  				<a :href="item.url" class="menu-item">{{ 	item.descricao }}</a>
+	  			<li v-for="route in routes" class="lista">
+		  				<router-link :to="route.path ? route.path : '/'" class="menu-item">{{ 	route.titulo }}</router-link>
 	  			</li>
 	  		</ul>	
 			</div>
   	</div>
 	  	  		
-
-  	<input type="search" class="filtro" placeholder="título" @input="filtro = $event.target.value">
-  	<ul class="fotos">
-      <li class="fotos-item" v-for="foto of fotosComFiltro">
-      	<krgr-painel :titulo="foto.titulo">
-      		<imagem-responsiva :url="foto.url" :alt="foto.titulo" />
-				</krgr-painel>
-      	
-      </li>
-    </ul>
+  	<router-view></router-view>
 
   </div>
 
 </template>
 
 <script>
-import Painel from './components/shared/painel/Painel.vue';
-import ImagemResponsiva from './components/shared/imagem-responsiva/ImagemResponsiva.vue';
+
+import { routes } from './routes'
 
 export default {
-	components: {
-		'krgr-painel': Painel,
-		'imagem-responsiva': ImagemResponsiva
-	},
 
   data() {
   	return {
   		titulo: 'krogr photos',
+  		routes,
   		menu: [
   			{
-  				url: 'sign_up.html',
+  				url: 'cadastro',
   				descricao: 'sign up'
   			},
   			{
-  				url: 'store.html',
+  				url: 'store',
   				descricao: 'store'
   			},
   			{
-  				url: 'about.html',
+  				url: 'about',
   				descricao: 'about'
   			}
   		],
-  		fotos: [],
-  		filtro: ''
   	}
-  },
-
-  computed: {
-  	fotosComFiltro() {
-  		if(this.filtro) {
-  			let exp = new RegExp(this.filtro.trim(), 'i');
-  			return this.fotos.filter(foto => exp.test(foto.titulo));
-  		} else {
-  			return this.fotos;
-  		}
-  	}
-  },
-
-  created() {
-  	this.$http.get('http://localhost:3000/v1/fotos')
-  		.then(res => res.json())
-  		.then(fotos => this.fotos = fotos, err => console.log('Erro: API de fotos não encontrada.'));
-
-  }
+	}
 }
 </script>
 
@@ -91,7 +61,7 @@ export default {
 	background-image: url("./assets/banner2.jpg");
 }
 
-.title-container {
+.container .title-container {
 	margin: auto;
 	text-align: center;
 	font-family: helvetica;
@@ -99,8 +69,7 @@ export default {
 	
 }
 
-.title {	
-	font-family: helvetica;
+.container .title-container .title {
 	border: 3px solid #e6e6e6;
 	padding: 10px;
 	width: 300px;
@@ -127,23 +96,6 @@ export default {
 	color: #333;	
 	text-decoration: none;
 	padding: 10px;
-}
-
-/* Estilo da lista de fotos */
-.filtro {
-	display: block;
-	margin-top: 10px;
-	padding: 8px;
-	width: 100%;
-}
-
-.fotos {
-	margin: 0 auto;
-	list-style: none;
-}
-
-.fotos .fotos-item {
-	display: inline-block;
 }
 
 </style>
