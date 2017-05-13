@@ -7,6 +7,7 @@
       <li class="fotos-item" v-for="foto of fotosComFiltro">
       	<krgr-painel :titulo="foto.titulo">
       		<imagem-responsiva :url="foto.url" :alt="foto.titulo" />
+          <krgr-botao tipo="button" rotulo="remove"/>
 				</krgr-painel>
       	
       </li>
@@ -19,11 +20,13 @@
 <script>
 import Painel from '../shared/painel/Painel.vue';
 import ImagemResponsiva from '../shared/imagem-responsiva/ImagemResponsiva.vue';
+import Botao from '../shared/botao/Botao.vue';
 
 export default {
 	components: {
 		'krgr-painel': Painel,
-		'imagem-responsiva': ImagemResponsiva
+		'imagem-responsiva': ImagemResponsiva,
+    'krgr-botao': Botao
 	},
 
   data() {
