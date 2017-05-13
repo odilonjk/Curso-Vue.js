@@ -2,21 +2,11 @@
 	
   <div id="root">
 
-  	<div class="container"> 	
-	  	<div class="title-container">
-	  		
-	  		<h1 class="title">{{ titulo }}</h1>	
-	  		
-	  		
-		  	<ul class="menu">
-	  			<li v-for="route in routes" class="lista">
-		  				<router-link :to="route.path ? route.path : '/'" class="menu-item">{{ 	route.titulo }}</router-link>
-	  			</li>
-	  		</ul>	
-			</div>
-  	</div>
-	  	  		
-  	<router-view></router-view>
+  	<krgr-header :routes="routes"/>
+	  
+	  <transition name="fade">
+  		<router-view></router-view>
+  	</transition>
 
   </div>
 
@@ -25,12 +15,15 @@
 <script>
 
 import { routes } from './routes'
+import Header from './components/shared/header/Header.vue'
 
 export default {
 
+	components: {
+		'krgr-header': Header
+	},
   data() {
   	return {
-  		titulo: 'krogr photos',
   		routes,
   		menu: [
   			{
@@ -53,49 +46,18 @@ export default {
 
 <style>
 
-/* Estilo do header */
-.container {
-	margin: 0 auto;
-	width: 100%;
-	height: 300px;
-	background-image: url("./assets/banner2.jpg");
+/* Estilo da transição entre componentes */
+.fade-enter-active, .fade-leave-active {
+  transition-property: opacity;
+  transition-duration: .25s;
 }
 
-.container .title-container {
-	margin: auto;
-	text-align: center;
-	font-family: helvetica;
-	display: table;
-	
+.fade-enter-active {
+  transition-delay: .25s;
 }
 
-.container .title-container .title {
-	border: 3px solid #e6e6e6;
-	padding: 10px;
-	width: 300px;
-}
-
- /* Estilo do menu do header */
-.menu {
-	margin-right: 40px;
-	text-align: center;
-}
-
-.menu li {
-	display: inline;
-}
-
-.menu li:not(:first-child):before {
-  content: "|";
-  opacity: 0.4;
-}
-
-.menu .menu-item {
-	font-family: helvetica;
-	font-weight: bold;
-	color: #333;	
-	text-decoration: none;
-	padding: 10px;
+.fade-enter, .fade-leave-active {
+  opacity: 0
 }
 
 </style>
