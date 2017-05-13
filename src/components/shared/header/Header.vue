@@ -17,7 +17,12 @@
 <script>
 
 export default {
-	props: ['routes'],
+	props: {
+		routes: {
+			type: Array,
+			required: true
+		}
+	},
 	data () {
 		return {
 			titulo: 'krgr photos'
