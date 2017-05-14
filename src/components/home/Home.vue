@@ -5,9 +5,10 @@
   	<input type="search" class="filtro" placeholder="título" @input="filtro =   $event.target.value">
   	<ul class="fotos">
       <li class="fotos-item" v-for="foto of fotosComFiltro">
-      	<krgr-painel :titulo="foto.titulo">
+      	
+        <krgr-painel :titulo="foto.titulo">
       		<imagem-responsiva :url="foto.url" :alt="foto.titulo" />
-          <krgr-botao tipo="button" rotulo="remove"/>
+          <krgr-botao tipo="button" rotulo="X" @botaoAtivado="remove(foto)"/>
 				</krgr-painel>
       	
       </li>
@@ -60,6 +61,14 @@ export default {
   			return this.fotos;
   		}
   	}
+  },
+
+  methods: {
+
+    remove(foto) {
+      alert('Foto removida! ' + foto.titulo);  
+    }
+
   },
 
   created() {

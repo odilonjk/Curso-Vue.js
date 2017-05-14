@@ -1,31 +1,39 @@
 <template>
-	<button class="botao botao-perigo" :type="tipo">{{ rotulo }}</button>
+	<button @click="disparaAcao" class="botao botao-remove" :type="tipo">{{ rotulo }}</button>
 </template>
 
 <script>
 export default {
 
-	props: ['tipo', 'rotulo']
+	props: ['tipo', 'rotulo'],
+	methods: {
+		disparaAcao() {
+			if(confirm('Confirma operação?')){
+				this.$emit('botaoAtivado');	
+			}
+		}
+	}
 
 }
 </script>
 
 <style>
 	.botao {
-		padding: 4px 8px;
+		padding: 3px 7px;
 		margin: 5px;
 		border-radius: 5px;
 		font-size: 12px;
 	}
 
-	.botao-perigo {
+	.botao-remove {
+		border-radius: 14px;
 		float: right;
 		background-color: #f44336;
 		color: white;
 		opacity: 0.8;
 	}
 
-	.botao-perigo:hover {
+	.botao-remove:hover {
 		box-shadow: 0 2px 6px 0 gray;
 		opacity: 1;
 	}
