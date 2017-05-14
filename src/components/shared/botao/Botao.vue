@@ -1,16 +1,37 @@
 <template>
-	<button @click="disparaAcao" class="botao botao-remove" :type="tipo">{{ rotulo }}</button>
+	<button @click="disparaAcao" :class="estiloDoBotao" :type="tipo">{{ rotulo }}</button>
 </template>
 
 <script>
 export default {
-
-	props: ['tipo', 'rotulo'],
+// ['tipo', 'rotulo', 'confirmacao', 'estilo']
+	props: {
+		tipo: {
+			required: true,
+			type: String
+		},
+		rotulo: {
+			required: true,
+			type: String
+		},
+		confirmacao: Boolean,
+		estilo: String
+	},
 	methods: {
 		disparaAcao() {
-			if(confirm('Confirma operação?')){
-				this.$emit('botaoAtivado');	
+			if(this.confirmacao) {
+				if(confirm('Confirma operação?')){
+					this.$emit('botaoAtivado');	
+				}
+				return;
 			}
+			this.$emit('botaoAtivado');
+		}
+	},
+	computed: {
+		estiloDoBotao() {
+			if(this.estilo == 'padrao' || !this.estilo) return 'botao botao-padrao';
+			if(this.estilo == 'remove') return 'botao botao-remove';
 		}
 	}
 
@@ -21,7 +42,6 @@ export default {
 	.botao {
 		padding: 3px 7px;
 		margin: 5px;
-		border-radius: 5px;
 		font-size: 12px;
 	}
 
@@ -41,5 +61,6 @@ export default {
 	.botao-padrao {
 		background-color: #e7e7e7; 
 		color: black;
+		border-radius: 5px;
 	}
 </style>

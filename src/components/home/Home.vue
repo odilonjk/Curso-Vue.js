@@ -8,7 +8,7 @@
       	
         <krgr-painel :titulo="foto.titulo">
       		<imagem-responsiva :url="foto.url" :alt="foto.titulo" />
-          <krgr-botao tipo="button" rotulo="X" @botaoAtivado="remove(foto)"/>
+          <krgr-botao tipo="button" rotulo="X" @botaoAtivado="remove(foto)" :confirmacao="true" estilo="remove"/>
 				</krgr-painel>
       	
       </li>
